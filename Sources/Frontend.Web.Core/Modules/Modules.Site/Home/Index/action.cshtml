@@ -1,0 +1,56 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using System.Web.Optimization
+@model Dal.AccountModel
+@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+@section pagetitle
+{
+    Главная страница чата
+}
+
+@section stylesheet
+{
+    @Styles.Render("~/Modules/Home/Index/css")
+}
+
+@section headscripts
+{
+    @Scripts.Render("~/Libraries/Components/Timers/js")
+    @Scripts.Render("~/Libraries/Components/WebApi/js")
+    @Scripts.Render("~/Libraries/Components/WebApi/Common/js")    
+}
+
+@section bodyscripts
+{
+    @Scripts.Render("~/Modules/Home/Index/js")
+}
+
+<a id="api-messages-sendmessage" href="/api/messages/sendmessage" class="hidden"></a>
+<a id="api-messages-getmessages" href="/api/messages/getmessages" class="hidden"></a>
+
+<li class="self hidden self-hidden">
+    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false" /></div>
+    <div class="msg"></div>
+</li>
+
+<li class="other hidden other-hidden">
+    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false" /></div>
+    <div class="msg"></div>
+</li>
+
+<div class="container-fluid">
+    <div class="row">
+        <ol class="chat">
+        </ol>        
+    </div>
+    <div class="row send-message">
+        <div id="div-textarea-message" class="col-md-11">
+            <textarea id="textarea-message" rows="2" class="textarea-size" placeholder="Type here!"></textarea><div class="emojis"></div>        
+        </div>
+        <div class="col-md-1">
+            <a id="button-send" class="btn btn-primary margin-top-30">Отправить</a>
+        </div>
+    </div>
+</div>
