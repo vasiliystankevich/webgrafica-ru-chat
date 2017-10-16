@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using System.Web.UI.WebControls;
 using Dal;
 using log4net;
 using Libraries.Core.Backend.Common;
 using Libraries.Core.Backend.WebApi;
-using Microsoft.Practices.ObjectBuilder2;
 using Project.Kernel;
 
 namespace Modules.WebApi.Controllers.Messages
@@ -33,7 +29,8 @@ namespace Modules.WebApi.Controllers.Messages
             var user = Context.Accounts.FirstOrDefault(u => u.AccountName == userName);
             user.LastActivity=DateTime.UtcNow;
             var message = Context.Messages.Create();
-            message.Init(userName, request.Message);
+            var encodedMessage = HttpUtility.HtmlEncode(request.Message);
+            message.Init(userName, encodedMessage);
             Context.Messages.Add(message);
             Context.SaveChanges();
             return BaseResponse.Ok();
@@ -41,8 +38,11 @@ namespace Modules.WebApi.Controllers.Messages
 
         public GetMessagesResponse GetMessages(GetMessagesRequest request)
         {
+            RemoveMessages();
             var username = HttpContext.Current.User.Identity.Name;
             var countMessages = Context.Messages.Count();
+            if (request.CountLastMessages < 0) request.CountLastMessages = countMessages;
+            if (request.CountLastMessages > countMessages) request.CountLastMessages = countMessages;
             var countSkipMessage = countMessages - request.CountLastMessages;
             if (countSkipMessage <= 0) countSkipMessage = 0;
             var messages = Context.Messages.OrderBy(m => m.TimeMessage).Skip(countSkipMessage)
@@ -60,6 +60,14 @@ namespace Modules.WebApi.Controllers.Messages
                     return userMessage;
                 }).ToList();
             return new GetMessagesResponse(messages);
+        }
+
+        private void RemoveMessages()
+        {
+            var deleteTime = DateTime.UtcNow.AddDays(-1);
+            var deleteMessages = Context.Messages.Where(m => m.TimeMessage <= deleteTime).ToList();
+            deleteMessages.ForEach(m => Context.Messages.Remove(m));
+            Context.SaveChanges();
         }
 
         public IDalContext Context { get; set; }

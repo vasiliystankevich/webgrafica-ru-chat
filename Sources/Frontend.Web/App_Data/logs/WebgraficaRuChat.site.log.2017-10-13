@@ -1,9 +1,0 @@
-ERROR 2017-10-13 01:07:49 [5] System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
-   в Modules.WebApi.Controllers.Messages.MessagesApiRepository.SendMessage(MessageRequest request) в E:\Work\webgrafica-ru-chat\Sources\Frontend.Web.Core\Modules\Modules.WebApi\Controllers\Messages\Repository.cs:строка 35
-   в Libraries.Core.Backend.WebApi.BaseApiController`1.<ExecuteAction>d__2`2.MoveNext() в E:\Work\webgrafica-ru-chat\Sources\Frontend.Web.Core\Libraries\Libraries.Core.Backend\WebApi\BaseApiController.cs:строка 39
-ERROR 2017-10-13 01:08:10 [5] System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
-   в Modules.WebApi.Controllers.Messages.MessagesApiRepository.SendMessage(MessageRequest request) в E:\Work\webgrafica-ru-chat\Sources\Frontend.Web.Core\Modules\Modules.WebApi\Controllers\Messages\Repository.cs:строка 35
-   в Libraries.Core.Backend.WebApi.BaseApiController`1.<ExecuteAction>d__2`2.MoveNext() в E:\Work\webgrafica-ru-chat\Sources\Frontend.Web.Core\Libraries\Libraries.Core.Backend\WebApi\BaseApiController.cs:строка 39
-ERROR 2017-10-13 01:08:41 [5] System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
-   в Modules.WebApi.Controllers.Messages.MessagesApiRepository.SendMessage(MessageRequest request) в E:\Work\webgrafica-ru-chat\Sources\Frontend.Web.Core\Modules\Modules.WebApi\Controllers\Messages\Repository.cs:строка 35
-   в Libraries.Core.Backend.WebApi.BaseApiController`1.<ExecuteAction>d__2`2.MoveNext() в E:\Work\webgrafica-ru-chat\Sources\Frontend.Web.Core\Libraries\Libraries.Core.Backend\WebApi\BaseApiController.cs:строка 39
